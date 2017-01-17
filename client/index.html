@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+<!--    <base href="/" />-->
+    <meta charset="UTF-8">
+    <title>MEAN APP</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.6.1/angular-route.min.js"></script>
+    <link href="style/styles.css" rel="stylesheet" />
+    <script src="app.js"></script>
+    <script src="./controllers/cavs.js"></script>
+    <script src="./controllers/home.js"></script>
+    <script src="./controllers/blog.js"></script>
+    <script src="./controllers/cavsPlayer.js"></script>
+
+</head>
+<body>
+    <header ng-include="'header.html'"></header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-view></div>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

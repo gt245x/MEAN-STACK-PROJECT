@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="row">
+        <h1>{{vm.title}}</h1>
+        <div class="container cavs-container">
+            <table class="table table-striped table-bordered table-hover table-condensed table-resposive">
+
+                <tr>
+                    <td>First Name</td>
+                    <td>{{cav.fname}}</td>
+                    <td ng-if="editing">
+                        <input type="text" ng-model="cav.fname" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td>{{cav.lname}}</td>
+                    <td ng-if="editing">
+                        <input type="text" ng-model="cav.lname" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td>{{cav.age}}</td>
+                    <td> ng-if="editing">
+                    <input type="number" ng-model="cav.age" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Height</td>
+                    <td>{{cav.height}}</td>
+                    <td ng-if="editing">
+                        <input type="number" ng-model="cav.height" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Position</td>
+                    <td>{{cav.position}}</td>
+                    <td ng-if="editing">
+                        <input type="text" ng-model="cav.position" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>College</td>
+                    <td>{{cav.college | uppercase}}</td>
+                    <td ng-if="editing">
+                        <input type="text" ng-model="cav.college" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Points per Game</td>
+                    <td>{{cav.ppg | number:1}}</td>
+                    <td ng-if="editing">
+                        <input type="number" ng-model="cav.ppg" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Salary</td>
+                    <td>{{cav.salary | currency:$ :0 }}</td>
+                    <td ng-if="editing">
+                        <input type="number" ng-model="cav.salary" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button ng-hide="editing" class="btn btn-btn-warning" ng-click="editing=!editing">
+                            Edit</button>
+                        <button ng-hide="!editing" class="btn btn-btn-success" ng-click="vm.updatePlayer(cav);
+                        editing=false;">Save</button>
+                        <button class="btn btn-primary" ng-hide="!editing" ng-click="editing=!editing">
+                            Back</button>
+                        <button class="btn btn-danger" ng-hide="editing" ng-click="vm.removePlayer(cav._id)"
+                        >Delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <button class="btn btn-primary btn-md" ng-hide="vm.adduser==true;" ng-click="vm.adduser=!vm.adduser">Add A Cavalier player</button>
+            <br /> <br />
+
+        </div>
+
+
+    </div>
+</div>
+

@@ -1,0 +1,36 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+#menu-bar{
+    background-color: #FFCC66;
+    padding: 10px;
+}
+
+#menu-bar h1{
+    font-size: 24px;
+    font-weight: normal;
+    display: inline-block;
+}
+
+#menu-bar ul{
+    float: right;
+    list-style-type: none;
+    padding: 0;
+    margin: 6px 0;
+}
+
+#menu-bar li{
+    float: right;
+    margin-left: 20px;
+}
+
+td {
+    text-align: center;
+}
+
+th {
+    text-align: center;
+}
+
+
