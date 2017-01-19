@@ -1,59 +1,72 @@
 <div class="container">
     <div class="row">
-    <h1>{{vm.title}}</h1>
+    <h1>{{title}}</h1>
     <div class="container cavs-container">
-        <table class="table table-striped table-bordered table-hover table-condensed table-resposive">
+        Search: <input type="text" class="searchinput" placeholder="Searh players by first name" ng-model="searchText.fname">
+        Rows to display : <input type="number" class="rowdisplay" placeholder="max rows to display" step="1" min="0" max="100" ng-model="rowLimit">
+        <br /> <br />
+        <div class="table-resposive">
+        <table class="table table-striped table-bordered table-hover table-condensed ">
             <thead>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Age</th>
-                <th>Height</th>
-                <th>Position</th>
-                <th>College</th>
-                <th>Points per Game</th>
-                <th>Salary</th>
+                <th ng-click="sortData('fname')">First Name<div ng-class="getSortClass('fname')"></div>
+                </th>
+                <th ng-click="sortData('lname')">Last Name<div ng-class="getSortClass('lname')"></div>
+                </th>
+                <th ng-click="sortData('age')">Age<div ng-class="getSortClass('age')"></div>
+                </th>
+                <th ng-click="sortData('height')">Height<div ng-class="getSortClass('height')"></div>
+                </th>
+                <th ng-click="sortData('position')">Position<div ng-class="getSortClass('position')"></div>
+                </th>
+                <th ng-click="sortData('college')">College<div ng-class="getSortClass('college')"></div>
+                </th>
+                <th ng-click="sortData('ppg')">Points per Game<div ng-class="getSortClass('ppg')"></div>
+                </th>
+                <th ng-click="sortData('salary')">Salary<div ng-class="getSortClass('salary')"></div>
+                </th>
             </thead>
             <tbody>
-                <tr ng-repeat="cav in vm.cavs" ng-class="$even ? 'info' : 'danger'">
-                    <td><a href="/cavs/{{cav._id}}">{{cav.fname}}</a></td>
-                    <td><a href="/cavs/{{cav._id}}">{{cav.lname}}</a></td>
-                    <td><a href="/cavs/{{cav._id}}">{{cav.age}}</a></td>
-                    <td><a href="/cavs/{{cav._id}}">{{cav.height}}</a></td>
-                    <td><a href="/cavs/{{cav._id}}">{{cav.position}}</a></td>
-                    <td><a href="/cavs/{{cav._id}}">{{cav.college | uppercase}}</a></td>
-                    <td><a href="/cavs/{{cav._id}}">{{cav.ppg | number:1}}</a></td>
-                    <td><a href="/cavs/{{cav._id"}}>{{cav.salary | currency:$ :0 }}</a></td>
+                <tr ng-repeat="cav in cavs | orderBy:sortColumn:reverseSort  | filter:searchText | limitTo: rowLimit" ng-class="$even ? 'info' : 'danger'" ng-click="goTo(cav._id)">
+                    <td>{{cav.fname}}</td>
+                    <td>{{cav.lname}}</td>
+                    <td>{{cav.age}}</td>
+                    <td>{{cav.height}}</td>
+                    <td>{{cav.position}}</td>
+                    <td>{{cav.college | uppercase}}</td>
+                    <td>{{cav.ppg | number:1}}</td>
+                    <td>{{cav.salary | currency:$ :0 }}</td>
                 </tr>
             </tbody>
         </table>
+        </div>
 
-        <button class="btn btn-primary btn-md" ng-hide="vm.adduser==true;" ng-click="vm.adduser=!vm.adduser">Add A Cavalier player</button>
+        <button class="btn btn-primary btn-md" ng-hide="adduser==true;" ng-click="adduser=!adduser">Add A Cavalier player</button>
         <br /> <br />
 
     </div>
 
-    <div class="container create-player" ng-hide="!vm.adduser">
+    <div class="container create-player" ng-hide="!adduser" novalidate>
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="inputFirstName">First Name</label>
-                    <input required type="text" placeholder="First Name" id="fname" class="form-control" ng-model="vm.player.fname">
+                    <input ng-required="true" type="text" placeholder="First Name" id="fname" class="form-control" ng-model="player.fname">
                 </div>
                 <div class="form-group">
                     <label for="inputLastName">Last Name</label>
-                    <input required type="text" placeholder="Last Name" id="lname" class="form-control" ng-model="vm.player.lname">
+                    <input ng-required="true" type="text" placeholder="Last Name" id="lname" class="form-control" ng-model="player.lname">
                 </div>
                 <div class="form-group">
                     <label for="playerage">Age</label>
-                    <input required type="number" placeholder="Age" id="age" class="form-control" ng-model="vm.player.age">
+                    <input ng-required="true" type="number" placeholder="Age" id="age" class="form-control" ng-model="player.age">
                 </div>
                 <div class="form-group">
                     <label for="playerheight">Height</label>
-                    <input required type="number" placeholder="Height (inches)" id="height" class="form-control" ng-model="vm.player.height">
+                    <input ng-required="true" type="number" placeholder="Height (inches)" id="height" class="form-control" ng-model="player.height">
                 </div>
                 <div class="form-group">
                     <label for="playerposition">Position</label>
-                    <select name="position" required id="position" class="form-control" ng-model="vm.player.position">
+                    <select name="position" ng-required="true" id="position" class="form-control" ng-model="player.position">
                         <option value="Center">Center</option>
                         <option value="Forward">Forward</option>
                         <option value="Guard">Guard</option>
@@ -61,23 +74,23 @@
                 </div>
                 <div class="form-group">
                     <label for="playercollege">College</label>
-                    <input required type="text" placeholder="College" id="college" class="form-control" ng-model="vm.player.college">
+                    <input type="text" placeholder="College" id="college" class="form-control" ng-model="player.college">
                 </div>
                 <div class="form-group">
                     <label for="playerpoints">Points Per Game</label>
-                    <input required type="number" placeholder="Avg PPG" id="ppg" class="form-control" ng-model="vm.player.ppg">
+                    <input ng-required="true" type="number" placeholder="Avg PPG" id="ppg" class="form-control" ng-model="player.ppg">
                 </div>
                 <div class="form-group">
                     <label for="playersalary">Salary</label>
-                    <input required type="number" placeholder="Salary" id="salary" class="form-control" ng-model="vm.player.salary">
+                    <input ng-required="true" type="number" placeholder="Salary" id="salary" class="form-control" ng-model="player.salary">
                 </div>
 
                 <br />
-                <button class="btn btn-success" ng-click="vm.addPlayer(vm.player)" ng-disabled="!vm.player.fname ||!vm.player.lname ||
-                 !vm.player.age || !vm.player.height || !vm.player.position || !vm.player.ppg || !vm.player.salary">Add</button>
-                <button class="btn btn-primary" ng-click="vm.adduser=false;">Back</button>
+                <button class="btn btn-success" ng-click="addPlayer(player)">Add</button>
 
-                <h4>{{vm.missingItemError}}</h4>
+                <button class="btn btn-primary" ng-click="adduser=false;">Back</button>
+
+                <h4 id="error">{{missingItemError}}</h4>
 
             </div>
         </div>

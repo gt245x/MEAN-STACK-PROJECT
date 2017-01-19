@@ -1,5 +1,18 @@
-<h1>{{hm.message}}</h1>
+<h2>{{message}}</h2>
+
+<P>
+    This project shows an app created using MongoDB, Express.js, AngularJS and Node.js known as MEAN. It has 2 different applications of MEAN(blog and cavs) showing CREATE, READ, UPDATE and DELETE(CRUD) functionalities.
+</P>
 
 
-AngularJS is a JavaScript framework. It can be added to an HTML page with a script tag.
-AngularJS extends HTML attributes with Directives, and binds data to HTML with Expressions.
+
+<h3>$scope vs $rootScope</h3>
+<p>
+The main difference between $rootScope and $Scope is that $rootScope is available globally for all controllers, whereas $scope is only available to the controller that has created it and it's children.</p>
+
+<h3>$scope vs Controller AS syntax</h3>
+<p>
+    $scope and 'this' work differently in AngullarJS. Controller AS syntax was released in 1.2.0 and makes the code more readable. When the Controller constructor function is used, 'this' is the controller. On the other hand, when $scope is being used, every controller has to have an associated $scope object.<br/>
+    When $scope is being used, it has to be injected into the controller function, whereas there is no need to inject it when Controller AS syntax is used unless it's needed for something else. This app uses $scope in one of the controllers and 'Controller As syntax' on the remaining controllers.
+
+</p>

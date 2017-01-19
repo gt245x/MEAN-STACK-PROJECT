@@ -1,21 +1,26 @@
-var Model = require('./models/cavsmodel.js')
 var express = require('express');
 var path = require('path');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 
+var app = express();
 
 var tasks = require('./routes/tasks');
 
-var app = express();
+
+
+
 
 var port = process.env.PORT || 3000;
+
 
 
 //MW
 app.use(bodyParser.json());//for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }));// for parsing application/x-www-form-urlencode
+
+
 
 
 //DB
@@ -29,11 +34,14 @@ mongoose.connect(db, function(err, response) {
     }
 });
 
-app.use(express.static(__dirname + '/client'));
-
-
 //routes
 app.use('/', tasks);
+
+
+
+
+app.use(express.static(__dirname + '/client'));
+
 
 
 

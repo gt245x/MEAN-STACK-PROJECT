@@ -1,7 +1,8 @@
-//(function () {
+(function () {
     angular
         .module("myApp",['ngRoute'])
         .config(function ($routeProvider, $locationProvider) {
+            $routeProvider.caseInsensitiveMatch = true;
             $routeProvider
                 .when("/home", {
                     templateUrl : "views/home.html",
@@ -26,14 +27,8 @@
                 .otherwise({
                     redirectTo: "/home"
                 });
-/*            if(window.history && window.history.pushState){
-                $locationProvider.html5Mode({
-                    enabled: true,
-                    requireBase: false
-                });
-            }*/
 
 
                 $locationProvider.html5Mode(false).hashPrefix('');
         });
-//})();
+})();
