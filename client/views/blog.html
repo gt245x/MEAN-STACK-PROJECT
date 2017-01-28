@@ -1,33 +1,32 @@
 <div class="container">
-    <h1>{{bm.header}}</h1>
+    <h1>{{header}}</h1>
 
     <div>
-        <input  ng-model="bm.post.title" class="form-control" placeholder="title" />
+        <input  ng-model="post.title" class="form-control" placeholder="title" />
         <br />
 
-        <textarea ng-model="bm.post.content" class="form-control" placeholder="content"></textarea>
+        <textarea ng-model="post.content" class="form-control" placeholder="content"></textarea>
 
         <br />
-        <button ng-click="bm.createPost(bm.post)" ng-disabled="!bm.post.title || !bm.post.content" class="btn btn-primary">Post</button>
+        <button ng-click="createPost(post)" ng-disabled="!post.title || !post.content" ng-show="!isAnyEditing()" class="btn btn-primary">Post</button>
 
-        <button ng-click="bm.updatePost(bm.post)" ng-disabled="!bm.post.title || !bm.post.content" class="btn btn-success">Update</button>
+        <button ng-click="updatePost(post)" ng-disabled="!post.title || !post.content" ng-show="isAnyEditing()" class="btn btn-success">Update</button>
 
         <br /> <br />
-        {{bm.missingItemError}}
+        {{missingItemError}}
     </div>
-    <div ng-repeat="post in bm.allposts">
+    <div ng-repeat="post in allposts">
         <h3>
             {{post.title}}
-            <a  style="cursor:pointer" ng-click="bm.editPost(post._id); editing=!editing"
-               ng-hide="editing" class="pull-right" >
-                <span class="glyphicon glyphicon-pencil"></span></a>
+            <a style="cursor:pointer" ng-click="editPost(post._id)" class="pull-right" >
+                <span class="glyphicon glyphicon-pencil" ng-hide="isEditing[post._id]"></span></a>
 
-            <a ng-click="bm.updatePost(post)" ng-hide="!editing" class="pull-right">
+            <a style="cursor:pointer" ng-click="updatePost()" ng-show="isEditing[post._id]" class="pull-right">
                 <span class="glyphicon glyphicon-ok"></span></a>
-            <a style="cursor:pointer" ng-click="bm.deletePost(post._id)" ng-hide="editing"
+            <a style="cursor:pointer" ng-click="deletePost(post._id)" ng-hide="isEditing[post._id]"
                class="pull-right"><span class="glyphicon glyphicon-trash"></span></a>
 
-            <button ng-hide="!editing" ng-click="editing=!editing; bm.post='' " class="btn btn-primary pull-right">Back</button>
+            <button ng-show="isEditing[post._id]"" ng-click="backAction(post._id)" class="btn btn-primary pull-right">Back</button>
 
         </h3>
         <em>{{post.posted | date:'yyyy-MM-dd HH:mm:ss' }}</em>
