@@ -13,7 +13,7 @@
 
 ## FEATURES
 
-- The app shows 2 distint applications of CRUD
+- The app shows 2 distinct applications of CRUD
 - Extensive use of numerous AngularJS features.
 - Express framework to build the backend.
 - Use of Schema to connect to MongoDB database.
